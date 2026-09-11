@@ -54,39 +54,42 @@
             background-position: 0 0, 15px 15px;
         }
         
-        /* تحسين وتبريز مفاتيح التنقل بين الأقسام */
+        /* أزرار تنقل بارزة وكبيرة جداً */
         .tab-btn {
             position: relative;
-            background: linear-gradient(135deg, #ffffff 0%, #f4ebd0 100%);
+            background: #ffffff;
             color: #1b3b2b;
             border: 2px solid #d4af37;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
         .tab-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 18px rgba(212, 175, 55, 0.35);
-            background: #ffffff;
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(212, 175, 55, 0.35);
             border-color: #b89428;
+            background: #f4ebd0;
         }
         .tab-btn.active {
             background: linear-gradient(135deg, #1b3b2b 0%, #132a1f 100%);
-            color: #f4ebd0;
-            border: 2px solid #d4af37;
-            box-shadow: 0 6px 16px rgba(27, 59, 43, 0.4);
-            transform: translateY(-2px);
+            color: #ffffff;
+            border: 2.5px solid #d4af37;
+            box-shadow: 0 10px 25px rgba(27, 59, 43, 0.45);
+            transform: translateY(-3px);
+        }
+        .tab-btn.active .tab-icon {
+            color: #d4af37;
         }
         .tab-btn.active::after {
             content: '';
             position: absolute;
-            bottom: -8px;
+            bottom: -10px;
             left: 50%;
             transform: translateX(-50%);
             width: 0;
             height: 0;
-            border-left: 7px solid transparent;
-            border-right: 7px solid transparent;
-            border-top: 8px solid #d4af37;
+            border-left: 9px solid transparent;
+            border-right: 9px solid transparent;
+            border-top: 10px solid #d4af37;
         }
         
         ::-webkit-scrollbar { width: 8px; }
@@ -174,16 +177,13 @@
                 </p>
             </div>
 
-            <!-- Cumulative Counter -->
+            <!-- Single Dua Button (Without Counter Text) -->
             <div class="inline-flex flex-col items-center">
-                <button id="duaButton" onclick="incrementDuaCounter()" class="group bg-gradient-to-r from-goldAccent to-yellow-500 hover:from-yellow-500 hover:to-goldAccent text-emeraldDark font-bold px-6 py-3 rounded-full text-sm md:text-base shadow-xl transform active:scale-95 transition duration-200 flex items-center space-x-2 space-x-reverse border border-yellow-200">
-                    <i class="fa-solid fa-hands-praying text-lg group-hover:scale-125 transition duration-300"></i>
+                <button id="duaButton" onclick="incrementDuaCounter()" class="group bg-gradient-to-r from-goldAccent to-yellow-500 hover:from-yellow-500 hover:to-goldAccent text-emeraldDark font-bold px-8 py-3.5 rounded-full text-base md:text-lg shadow-xl transform active:scale-95 transition duration-200 flex items-center space-x-2 space-x-reverse border-2 border-yellow-200">
+                    <i class="fa-solid fa-hands-praying text-xl group-hover:scale-125 transition duration-300"></i>
                     <span id="duaButtonText">أَمِّن وادعُ له بالرحمة والمغفرة</span>
                     <span id="clickHeartAnimation" class="hidden text-red-600 animate-ping">❤️</span>
                 </button>
-                <div class="mt-3 text-goldLight text-xs md:text-sm bg-emeraldDark/60 px-4 py-1.5 rounded-full border border-goldAccent/20">
-                    إجمالي الزيارات والدعوات المسجلة: <span id="duaCounter" class="font-bold text-goldAccent text-base mx-1">0</span>
-                </div>
             </div>
 
         </div>
@@ -192,27 +192,39 @@
     <!-- Main Content Tabs -->
     <main class="max-w-6xl mx-auto px-4 py-8 flex-grow w-full">
         
-        <!-- Navigation Buttons (Prominent Promoted Tabs) -->
-        <div class="flex flex-wrap justify-center gap-3 md:gap-4 mb-10 px-2">
-            <button onclick="switchTab('quran')" id="tab-quran" class="tab-btn active px-5 py-3 rounded-2xl font-bold text-xs md:text-sm flex items-center active:scale-95 cursor-pointer">
-                <i class="fa-solid fa-book-quran ml-2 text-goldAccent text-base group-hover:scale-110 transition"></i>
-                <span>القرآن الكريم (كامل المنشاوي)</span>
-            </button>
+        <!-- PROMINENT NAVIGATION TOOLBAR -->
+        <div class="bg-cardBg rounded-3xl p-6 shadow-2xl border-2 border-goldAccent/40 mb-16 relative">
+            
+            <!-- Helper Instruction Header -->
+            <div class="text-center mb-5">
+                <span class="inline-flex items-center text-xs md:text-sm font-bold text-emeraldMain bg-goldLight px-4 py-1.5 rounded-full border border-goldAccent/40 shadow-sm">
+                    <i class="fa-solid fa-arrow-pointer ml-2 text-goldAccent animate-bounce"></i>
+                    اضغط على أي قسم بالأسفل للتنقل بين أجزاء الموقع
+                </span>
+            </div>
 
-            <button onclick="switchTab('duas')" id="tab-duas" class="tab-btn px-5 py-3 rounded-2xl font-bold text-xs md:text-sm flex items-center active:scale-95 cursor-pointer">
-                <i class="fa-solid fa-hands-holding-circle ml-2 text-goldAccent text-base group-hover:scale-110 transition"></i>
-                <span>أدعية شاملة للمتوفى</span>
-            </button>
+            <!-- Navigation Buttons Grid -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-5">
+                <button onclick="switchTab('quran')" id="tab-quran" class="tab-btn active p-4 md:p-5 rounded-2xl font-bold text-sm md:text-base flex flex-col md:flex-row items-center justify-center text-center cursor-pointer">
+                    <i class="fa-solid fa-book-quran text-2xl md:text-xl ml-0 md:ml-2 mb-1 md:mb-0 tab-icon text-emeraldMain transition"></i>
+                    <span>القرآن الكريم كامل</span>
+                </button>
 
-            <button onclick="switchTab('hadith')" id="tab-hadith" class="tab-btn px-5 py-3 rounded-2xl font-bold text-xs md:text-sm flex items-center active:scale-95 cursor-pointer">
-                <i class="fa-solid fa-kaaba ml-2 text-goldAccent text-base group-hover:scale-110 transition"></i>
-                <span>الأحاديث النبوية الصحيحة</span>
-            </button>
+                <button onclick="switchTab('duas')" id="tab-duas" class="tab-btn p-4 md:p-5 rounded-2xl font-bold text-sm md:text-base flex flex-col md:flex-row items-center justify-center text-center cursor-pointer">
+                    <i class="fa-solid fa-hands-holding-circle text-2xl md:text-xl ml-0 md:ml-2 mb-1 md:mb-0 tab-icon text-emeraldMain transition"></i>
+                    <span>أدعية المتوفى</span>
+                </button>
 
-            <button onclick="switchTab('tasbeeh')" id="tab-tasbeeh" class="tab-btn px-5 py-3 rounded-2xl font-bold text-xs md:text-sm flex items-center active:scale-95 cursor-pointer">
-                <i class="fa-solid fa-stopwatch ml-2 text-goldAccent text-base group-hover:scale-110 transition"></i>
-                <span>الأذكار والسبحة الشاملة</span>
-            </button>
+                <button onclick="switchTab('hadith')" id="tab-hadith" class="tab-btn p-4 md:p-5 rounded-2xl font-bold text-sm md:text-base flex flex-col md:flex-row items-center justify-center text-center cursor-pointer">
+                    <i class="fa-solid fa-kaaba text-2xl md:text-xl ml-0 md:ml-2 mb-1 md:mb-0 tab-icon text-emeraldMain transition"></i>
+                    <span>الأحاديث النبوية</span>
+                </button>
+
+                <button onclick="switchTab('tasbeeh')" id="tab-tasbeeh" class="tab-btn p-4 md:p-5 rounded-2xl font-bold text-sm md:text-base flex flex-col md:flex-row items-center justify-center text-center cursor-pointer">
+                    <i class="fa-solid fa-stopwatch text-2xl md:text-xl ml-0 md:ml-2 mb-1 md:mb-0 tab-icon text-emeraldMain transition"></i>
+                    <span>الأذكار والسبحة</span>
+                </button>
+            </div>
         </div>
 
         <!-- SECTION 1: Quran Section -->
@@ -505,23 +517,8 @@
     </footer>
 
     <script>
-        // 1. Cumulative Visit & Prayer Counter
-        let totalCount = parseInt(localStorage.getItem('ashraf_total_cumulative_count') || '1');
-        let hasVisitedSession = sessionStorage.getItem('ashraf_session_visited') === 'true';
-
-        if (!hasVisitedSession) {
-            totalCount++;
-            localStorage.setItem('ashraf_total_cumulative_count', totalCount);
-            sessionStorage.setItem('ashraf_session_visited', 'true');
-        }
-
-        document.getElementById('duaCounter').innerText = totalCount.toLocaleString('ar-EG');
-
+        // 1. Single Dua Interactive Feedback
         function incrementDuaCounter() {
-            totalCount++;
-            localStorage.setItem('ashraf_total_cumulative_count', totalCount);
-
-            document.getElementById('duaCounter').innerText = totalCount.toLocaleString('ar-EG');
             document.getElementById('duaButtonText').innerText = 'تم تسجيل دعائك (جزاك الله خيراً)';
 
             const heart = document.getElementById('clickHeartAnimation');
@@ -610,8 +607,8 @@
                     let surahHTML = '';
                     data.verses.forEach((verse, idx) => {
                         let text = verse.text_uthmani;
-                        if (surahNumber !== "1" && idx === 0 && text.startsWith("بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ")) {
-                            text = text.replace("بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ", "").trim();
+                        if (surahNumber !== "1" && idx === 0 && text.startsWith("بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ")) {
+                            text = text.replace("بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ", "").trim();
                         }
                         surahHTML += `${text} <span class="ayah-badge">${idx + 1}</span> `;
                     });

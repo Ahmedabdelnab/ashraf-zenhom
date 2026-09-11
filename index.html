@@ -53,11 +53,42 @@
             background-size: 30px 30px;
             background-position: 0 0, 15px 15px;
         }
-        .tab-btn.active {
-            background-color: #1b3b2b;
-            color: #ffffff;
-            border-color: #d4af37;
+        
+        /* تحسين وتبريز مفاتيح التنقل بين الأقسام */
+        .tab-btn {
+            position: relative;
+            background: linear-gradient(135deg, #ffffff 0%, #f4ebd0 100%);
+            color: #1b3b2b;
+            border: 2px solid #d4af37;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
+        .tab-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 18px rgba(212, 175, 55, 0.35);
+            background: #ffffff;
+            border-color: #b89428;
+        }
+        .tab-btn.active {
+            background: linear-gradient(135deg, #1b3b2b 0%, #132a1f 100%);
+            color: #f4ebd0;
+            border: 2px solid #d4af37;
+            box-shadow: 0 6px 16px rgba(27, 59, 43, 0.4);
+            transform: translateY(-2px);
+        }
+        .tab-btn.active::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 7px solid transparent;
+            border-right: 7px solid transparent;
+            border-top: 8px solid #d4af37;
+        }
+        
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: #f1f1f1; }
         ::-webkit-scrollbar-thumb { background: #1b3b2b; border-radius: 4px; }
@@ -113,7 +144,6 @@
             <!-- Single Static Photo Display -->
             <div class="relative inline-block mb-6">
                 <div class="w-40 h-40 md:w-48 md:h-48 rounded-full overflow-hidden gold-border gold-glow mx-auto relative bg-emeraldDark">
-                    <!-- ضع اسم الصورة الخاصة بك مكان src التالي -->
                     <img id="profileImage" src="اشرف.jpg" alt="أشرف إبراهيم زينهم حافظ" class="w-full h-full object-cover object-center" onerror="this.onerror=null; this.src='https://placehold.co/300x300/1b3b2b/d4af37?text=%D8%A3%D8%B4%D8%B1%D9%81+%D8%AD%D8%A7%D9%81%D8%B8';">
                 </div>
 
@@ -162,23 +192,26 @@
     <!-- Main Content Tabs -->
     <main class="max-w-6xl mx-auto px-4 py-8 flex-grow w-full">
         
-        <!-- Navigation Buttons -->
-        <div class="flex flex-wrap justify-center gap-2 md:gap-3 mb-8">
-            <button onclick="switchTab('quran')" id="tab-quran" class="tab-btn active bg-white text-emeraldMain border border-emeraldMain/30 hover:border-goldAccent px-4 py-2.5 rounded-xl font-bold text-xs md:text-sm transition duration-300 flex items-center shadow-sm">
-                <i class="fa-solid fa-book-quran ml-2 text-goldAccent"></i>
-                القرآن الكريم (كامل المنشاوي)
+        <!-- Navigation Buttons (Prominent Promoted Tabs) -->
+        <div class="flex flex-wrap justify-center gap-3 md:gap-4 mb-10 px-2">
+            <button onclick="switchTab('quran')" id="tab-quran" class="tab-btn active px-5 py-3 rounded-2xl font-bold text-xs md:text-sm flex items-center active:scale-95 cursor-pointer">
+                <i class="fa-solid fa-book-quran ml-2 text-goldAccent text-base group-hover:scale-110 transition"></i>
+                <span>القرآن الكريم (كامل المنشاوي)</span>
             </button>
-            <button onclick="switchTab('duas')" id="tab-duas" class="tab-btn bg-white text-emeraldMain border border-emeraldMain/30 hover:border-goldAccent px-4 py-2.5 rounded-xl font-bold text-xs md:text-sm transition duration-300 flex items-center shadow-sm">
-                <i class="fa-solid fa-hands-holding-circle ml-2 text-goldAccent"></i>
-                أدعية شاملة للمتوفى
+
+            <button onclick="switchTab('duas')" id="tab-duas" class="tab-btn px-5 py-3 rounded-2xl font-bold text-xs md:text-sm flex items-center active:scale-95 cursor-pointer">
+                <i class="fa-solid fa-hands-holding-circle ml-2 text-goldAccent text-base group-hover:scale-110 transition"></i>
+                <span>أدعية شاملة للمتوفى</span>
             </button>
-            <button onclick="switchTab('hadith')" id="tab-hadith" class="tab-btn bg-white text-emeraldMain border border-emeraldMain/30 hover:border-goldAccent px-4 py-2.5 rounded-xl font-bold text-xs md:text-sm transition duration-300 flex items-center shadow-sm">
-                <i class="fa-solid fa-kaaba ml-2 text-goldAccent"></i>
-                الأحاديث النبوية الصحيحة
+
+            <button onclick="switchTab('hadith')" id="tab-hadith" class="tab-btn px-5 py-3 rounded-2xl font-bold text-xs md:text-sm flex items-center active:scale-95 cursor-pointer">
+                <i class="fa-solid fa-kaaba ml-2 text-goldAccent text-base group-hover:scale-110 transition"></i>
+                <span>الأحاديث النبوية الصحيحة</span>
             </button>
-            <button onclick="switchTab('tasbeeh')" id="tab-tasbeeh" class="tab-btn bg-white text-emeraldMain border border-emeraldMain/30 hover:border-goldAccent px-4 py-2.5 rounded-xl font-bold text-xs md:text-sm transition duration-300 flex items-center shadow-sm">
-                <i class="fa-solid fa-stopwatch ml-2 text-goldAccent"></i>
-                الأذكار والسبحة الشاملة
+
+            <button onclick="switchTab('tasbeeh')" id="tab-tasbeeh" class="tab-btn px-5 py-3 rounded-2xl font-bold text-xs md:text-sm flex items-center active:scale-95 cursor-pointer">
+                <i class="fa-solid fa-stopwatch ml-2 text-goldAccent text-base group-hover:scale-110 transition"></i>
+                <span>الأذكار والسبحة الشاملة</span>
             </button>
         </div>
 
@@ -578,7 +611,7 @@
                     data.verses.forEach((verse, idx) => {
                         let text = verse.text_uthmani;
                         if (surahNumber !== "1" && idx === 0 && text.startsWith("بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ")) {
-                            text = text.replace("بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ", "").trim();
+                            text = text.replace("بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ", "").trim();
                         }
                         surahHTML += `${text} <span class="ayah-badge">${idx + 1}</span> `;
                     });
